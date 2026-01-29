@@ -1,5 +1,10 @@
 /* I have 3 conflicting code prettiers running at the same time. */
 
+const THEME_KEY = "newton-theme";
+const MODE_KEY = "newton-mode";
+const CLOAK_TITLE_KEY = "newton-cloak-title";
+const CLOAK_FAVICON_KEY = "newton-cloak-favicon";
+
 /* Constants */
 const BASE = "https://cdn.jsdelivr.net/gh/gn-math",
   ZONES = `${BASE}/assets@main/zones.json?t=${Date.now()}`;
@@ -11,8 +16,8 @@ const EL = (id) => document.getElementById(id);
 
 const App = {
   async init() {
-    this.setTheme(localStorage.getItem("phantom-theme") || "slate"); // sets default theme to slate
-    this.setMode(localStorage.getItem("phantom-mode") || "window"); // sets default mode to window
+    this.setTheme(localStorage.getItem(THEME_KEY) || "midnight"); // sets default theme to midnight
+    this.setMode(localStorage.getItem(MODE_KEY) || "window"); // sets default mode to window
     this.loadCloak();
 
     try {
@@ -43,13 +48,13 @@ const App = {
 
   setTheme(t) {
     document.documentElement.setAttribute("data-theme", t);
-    localStorage.setItem("phantom-theme", t);
+    localStorage.setItem(THEME_KEY, t);
     this.toggle("theme", t);
   },
 
   setMode(m) {
     MODE = m;
-    localStorage.setItem("phantom-mode", m);
+    localStorage.setItem(MODE_KEY, m);
     this.toggle("mode", m);
   },
 
@@ -83,10 +88,8 @@ const App = {
     const modal = EL("settings-modal");
     const isOpen = modal.classList.toggle("active");
     if (isOpen) {
-      EL("cloak-title").value =
-        localStorage.getItem("phantom-cloak-title") || "";
-      EL("cloak-favicon").value =
-        localStorage.getItem("phantom-cloak-favicon") || "";
+      EL("cloak-title").value = localStorage.getItem(CLOAK_TITLE_KEY) || "";
+      EL("cloak-favicon").value = localStorage.getItem(CLOAK_FAVICON_KEY) || "";
     }
   },
 
@@ -94,16 +97,16 @@ const App = {
     const title = EL("cloak-title").value;
     const favicon = EL("cloak-favicon").value;
 
-    localStorage.setItem("phantom-cloak-title", title);
-    localStorage.setItem("phantom-cloak-favicon", favicon);
+    localStorage.setItem(CLOAK_TITLE_KEY, title);
+    localStorage.setItem(CLOAK_FAVICON_KEY, favicon);
 
     this.applyCloak(title, favicon);
     this.toggleSettings();
   },
 
   loadCloak() {
-    const title = localStorage.getItem("phantom-cloak-title");
-    const favicon = localStorage.getItem("phantom-cloak-favicon");
+    const title = localStorage.getItem(CLOAK_TITLE_KEY);
+    const favicon = localStorage.getItem(CLOAK_FAVICON_KEY);
     if (title || favicon) this.applyCloak(title, favicon);
   },
 

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Newton</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Newton</h1>
+        <div class="switchers">
+            <div class="switcher" id="theme-switcher">
+                <span id="theme-quartz" onclick="App.setTheme('quartz')">QUARTZ</span>
+                <span id="theme-slate" onclick="App.setTheme('slate')">SLATE</span>
+                <span id="theme-midnight" onclick="App.setTheme('midnight')">MIDNIGHT</span
+          >
+        </div>
+      </div>
+    </header>
+
+    <main id="content">
+      <p>Proxying is arriving soon. Stay tuned!</p>
+    </main>
+
+    <div id="navbar-container"></div>
+
+    <script src="../components/componentLoader.js"></script>
+    <script>
+      const THEME_KEY = "newton-theme";
+      const App = {
+        init() {
+          this.loadTheme();
+          this.updateThemeSwitcher();
+        },
+
+        loadTheme() {
+          const theme = localStorage.getItem(THEME_KEY) || "midnight";
+          this.setTheme(theme);
+        },
+
+        setTheme(theme) {
+          localStorage.setItem(THEME_KEY, theme);
+          document.documentElement.setAttribute("data-theme", theme);
+          this.updateThemeSwitcher();
+        },
+
+        updateThemeSwitcher() {
+          const theme = localStorage.getItem(THEME_KEY) || "midnight";
+          document.querySelectorAll(".switcher span").forEach((span) => {
+            span.classList.remove("active");
+          });
+          document.getElementById("theme-" + theme)?.classList.add("active");
+        },
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        App.init();
+        loadNavbar("../components/navbar.html");
+      });
+    </script>
+  </body>
+</html>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Google</title>
     <link rel="icon" href="https://www.google.com/favicon.ico" />
-    <link rel="stylesheet" href="games.css" />
+    <link rel="stylesheet" href="index.css" />
 </head>
 
 <body>
@@ -64,7 +64,13 @@
 
     <div id="restore-btn" onclick="App.restore()">RESTORE</div>
 
+    <div id="navbar-container"></div>
+
+    <script src="../components/componentLoader.js"></script>
     <script src="games.js"></script>
+    <script>
+        loadNavbar('../components/navbar.html');
+    </script>
 </body>
 
 </html>

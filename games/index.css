@@ -1,99 +1,6 @@
-/* Constants */
+@import url("../components/shared.css");
 
-:root {
-    --bg: #050505;
-    --fg: #555;
-    --hl: #eee;
-    --br: #111;
-    --transition-main: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-
-/* Themes */
-
-[data-theme="quartz"] {
-    --bg: #fff;
-    --fg: #666;
-    --hl: #000;
-    --br: #eee;
-}
-
-[data-theme="slate"] {
-    --bg: #222;
-    --fg: #888;
-    --hl: #eee;
-    --br: #333;
-}
-
-[data-theme="midnight"] {
-    --bg: #000;
-    --fg: #777;
-    --hl: #fff;
-    --br: #222;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    background: var(--bg);
-    color: var(--fg);
-    font: clamp(9px, 0.8vw + 6px, 11px)/1.6 "JetBrains Mono", monospace;
-    margin: 0;
-    padding: 5vh 8vw;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    overflow-x: hidden;
-}
-
-header,
-.switchers,
-.switcher,
-.window-bar-buttons,
-#window-bar,
-#window-overlay,
-.game-card {
-    display: flex;
-    align-items: center;
-}
-
-header {
-    justify-content: space-between;
-    margin-bottom: 3rem;
-    border-bottom: 1px solid var(--br);
-    flex-wrap: wrap;
-    padding-bottom: 0.5rem;
-    gap: 1.5rem;
-}
-
-.switchers,
-.switcher {
-    gap: 1.5rem;
-}
-
-.switcher {
-    gap: 0.8rem;
-    border-left: 1px solid var(--br);
-    padding-left: 1rem;
-}
-
-.switcher span {
-    cursor: pointer;
-    font-size: 0.75rem;
-    padding: 0.4rem 0;
-    border-bottom: 2px solid transparent;
-    transition: var(--transition-main);
-}
-
-.switcher span:hover,
-.switcher .active {
-    color: var(--hl);
-}
-
-.switcher .active {
-    border-color: var(--hl);
-}
+/* Input Styling */
 
 input {
     flex: 1;
@@ -107,6 +14,22 @@ input {
     letter-spacing: inherit;
 }
 
+#gameSearch {
+    border-bottom: 1px solid var(--br);
+    flex: 1;
+    min-width: 12rem;
+    background: transparent;
+    color: var(--hl);
+    padding: 1rem 0;
+    outline: none;
+    font: inherit;
+    letter-spacing: inherit;
+    margin-bottom: 1.5rem;
+}
+
+#gameSearch::placeholder {
+    color: var(--fg);
+}
 
 /* Games Grid */
 
@@ -366,7 +289,54 @@ input {
 }
 
 
-/* 
-Responsiveness 
+/* Bottom Navigation */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg);
+    border-top: 1px solid var(--br);
+    z-index: 100;
+}
+
+.nav-btn {
+    flex: 1;
+    max-width: 150px;
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--br);
+    background: transparent;
+    color: var(--fg);
+    text-decoration: none;
+    font: inherit;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: inherit;
+    cursor: pointer;
+    transition: var(--transition-main);
+    text-align: center;
+    display: inline-block;
+}
+
+.nav-btn:hover {
+    border-color: var(--hl);
+    color: var(--hl);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-btn.active {
+    border-color: var(--hl);
+    color: var(--hl);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+
+/*
+Responsiveness
 Just kidding no one cares about responsiveness
 */

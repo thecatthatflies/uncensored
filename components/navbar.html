@@ -1,0 +1,31 @@
+<nav id="navbar" class="bottom-nav">
+    <a id="nav-home" class="nav-btn" href="">HOME</a>
+    <a id="nav-games" class="nav-btn" href="">GAMES</a>
+    <a id="nav-proxy" class="nav-btn" href="">PROXY</a>
+</nav>
+
+<script>
+    function setActiveNav() {
+        const path = window.location.pathname;
+        const isHomepage = path.includes('/homepage') || path === '/' || path.endsWith('index.html');
+
+        // Set href links based on current location
+        document.getElementById('nav-home').href = isHomepage ? './' : '../homepage/index.html';
+        document.getElementById('nav-games').href = isHomepage ? '../games/index.html' : '../../games/index.html';
+        document.getElementById('nav-proxy').href = isHomepage ? '../proxy/index.html' : '../../proxy/index.html';
+
+        // Clear active classes
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+        // Determine which page we're on and mark as active
+        if (path.includes('/proxy')) {
+            document.getElementById('nav-proxy').classList.add('active');
+        } else if (path.includes('/games')) {
+            document.getElementById('nav-games').classList.add('active');
+        } else {
+            document.getElementById('nav-home').classList.add('active');
+        }
+    }
+
+    setActiveNav();
+</script>

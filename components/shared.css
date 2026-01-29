@@ -1,0 +1,229 @@
+/* Constants */
+
+:root {
+    --bg: #050505;
+    --fg: #555;
+    --hl: #eee;
+    --br: #111;
+    --transition-main: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Themes */
+
+[data-theme="quartz"] {
+    --bg: #fff;
+    --fg: #666;
+    --hl: #000;
+    --br: #eee;
+}
+
+[data-theme="slate"] {
+    --bg: #222;
+    --fg: #888;
+    --hl: #eee;
+    --br: #333;
+}
+
+[data-theme="midnight"] {
+    --bg: #000;
+    --fg: #777;
+    --hl: #fff;
+    --br: #222;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    color: var(--fg);
+    font: clamp(9px, 0.8vw + 6px, 11px)/1.6 "JetBrains Mono", monospace;
+    margin: 0;
+    padding: 5vh 8vw 120px 8vw;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    overflow-x: hidden;
+    transition: background-color var(--transition-main), color var(--transition-main);
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--br);
+    padding-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+header h1 {
+    margin: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.switchers,
+.switcher {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.switcher {
+    gap: 0.8rem;
+    border-left: 1px solid var(--br);
+    padding-left: 1rem;
+}
+
+.switcher span {
+    cursor: pointer;
+    font-size: 0.75rem;
+    padding: 0.4rem 0;
+    border-bottom: 2px solid transparent;
+    transition: var(--transition-main);
+}
+
+.switcher span:hover,
+.switcher .active {
+    color: var(--hl);
+}
+
+.switcher .active {
+    border-color: var(--hl);
+}
+
+.section {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.card {
+    flex: 1;
+    min-width: 200px;
+    padding: 2rem;
+    border: 1px solid var(--br);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.5rem;
+    transition: var(--transition-main);
+}
+
+.card:hover {
+    border-color: var(--fg);
+    background: rgba(255, 255, 255, 0.01);
+}
+
+.card h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.card p {
+    margin: 0;
+    color: var(--fg);
+    line-height: 1.8;
+}
+
+.btn {
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--br);
+    background: transparent;
+    color: var(--hl);
+    cursor: pointer;
+    text-decoration: none;
+    font: inherit;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: inherit;
+    transition: var(--transition-main);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn:hover {
+    border-color: var(--hl);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Bottom Navigation */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg);
+    border-top: 1px solid var(--br);
+    z-index: 100;
+}
+
+.nav-btn {
+    flex: 1;
+    max-width: 150px;
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--br);
+    background: transparent;
+    color: var(--fg);
+    text-decoration: none;
+    font: inherit;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: inherit;
+    cursor: pointer;
+    transition: var(--transition-main);
+    text-align: center;
+}
+
+.nav-btn:hover {
+    border-color: var(--hl);
+    color: var(--hl);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-btn.active {
+    border-color: var(--hl);
+    color: var(--hl);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Custom Scrollbar */
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--br);
+    border-radius: 6px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--fg);
+    background-clip: padding-box;
+}
+
+/* Firefox Scrollbar */
+* {
+    scrollbar-color: var(--br) transparent;
+    scrollbar-width: thin;
+}

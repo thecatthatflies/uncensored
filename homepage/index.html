@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Newton</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Newton</h1>
+        <div class="switchers">
+            <div class="switcher" id="theme-switcher">
+                <span id="theme-quartz" onclick="App.setTheme('quartz')">QUARTZ</span>
+                <span id="theme-slate" onclick="App.setTheme('slate')">SLATE</span>
+                <span id="theme-midnight" onclick="App.setTheme('midnight')">MIDNIGHT</span>
+            </div>
+        </div>
+    </header>
+
+    <main id="content">
+        <div class="section">
+            <a href="../games/index.html" class="card">
+                <h3>Games</h3>
+                <p>Play a collection of games.</p>
+            </a>
+            <a href="../proxy/index.html" class="card">
+                <h3>Proxy</h3>
+                <p>Proxying is arriving soon. Stay tuned!</p>
+            </a>
+        </div>
+    </main>
+
+    <div id="navbar-container"></div>
+
+    <script src="../components/componentLoader.js"></script>
+    <script src="index.js"></script>
+    <script>
+        loadNavbar('../components/navbar.html');
+    </script>
+</body>
+
+</html>
