@@ -67,6 +67,7 @@ const App = {
     this.setMode(localStorage.getItem(MODE_KEY) || DEFAULT_MODE);
     this.loadCloak();
     this.setupEventListeners();
+    this.setupDragging();
 
     try {
       await this.loadGames();
@@ -144,6 +145,93 @@ const App = {
     if (minBtn) minBtn.addEventListener("click", () => this.minimize());
     if (maxBtn) maxBtn.addEventListener("click", () => this.maximize());
     if (restoreBtn) restoreBtn.addEventListener("click", () => this.restore());
+
+    // Double click bar to maximize
+    const winBar = getElement("window-bar");
+    if (winBar) {
+      winBar.addEventListener("dblclick", (e) => {
+        if (e.target.id === "window-bar" || e.target.id === "win-title") {
+          this.maximize();
+        }
+      });
+    }
+  },
+
+  /**
+   * Setup draggable window functionality
+   */
+  setupDragging() {
+    const win = getElement("game-window");
+    const bar = getElement("window-bar");
+    if (!win || !bar) return;
+
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    const getPointerPos = (e) => {
+      if (e.touches && e.touches.length > 0) {
+        return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+      return { x: e.clientX, y: e.clientY };
+    };
+
+    const applyTransform = (x, y) => {
+      win.style.transform = `translate(${x}px, ${y}px)`;
+    };
+
+    const dragStart = (e) => {
+      if (win.classList.contains("maximized")) return;
+      if (e.target.closest(".window-bar-buttons")) return;
+      if (!bar.contains(e.target) && e.target !== bar) return;
+
+      isDragging = true;
+
+      if (e.touches) {
+        e.preventDefault();
+      }
+
+      const pos = getPointerPos(e);
+      startX = pos.x - offsetX;
+      startY = pos.y - offsetY;
+    };
+
+    const drag = (e) => {
+      if (!isDragging) return;
+
+      if (e.touches) {
+        e.preventDefault();
+      }
+
+      const pos = getPointerPos(e);
+      offsetX = pos.x - startX;
+      offsetY = pos.y - startY;
+
+      applyTransform(offsetX, offsetY);
+    };
+
+    const dragEnd = () => {
+      isDragging = false;
+    };
+
+    bar.addEventListener("mousedown", dragStart);
+    document.addEventListener("mousemove", drag);
+    document.addEventListener("mouseup", dragEnd);
+
+    bar.addEventListener("touchstart", dragStart, { passive: false });
+    document.addEventListener("touchmove", drag, { passive: false });
+    document.addEventListener("touchend", dragEnd);
+
+    const originalClose = this.close.bind(this);
+    this.close = () => {
+      originalClose();
+      offsetX = 0;
+      offsetY = 0;
+      applyTransform(0, 0);
+      isDragging = false;
+    };
   },
 
   /**
@@ -211,6 +299,7 @@ const App = {
       gameFrame.srcdoc = "";
       gameFrame.src = "";
       overlay.style.display = "none";
+      gameWindow.style.transform = "";
     }, TRANSITION_DURATION_MS);
   },
 
@@ -221,6 +310,11 @@ const App = {
     const gameWindow = getElement("game-window");
     if (gameWindow) {
       gameWindow.classList.toggle("maximized");
+      if (gameWindow.classList.contains("maximized")) {
+        gameWindow.style.transform = "";
+      }
+      const gameFrame = getElement("game-frame");
+      if (gameFrame) gameFrame.focus();
     }
   },
 
@@ -231,7 +325,10 @@ const App = {
     const gameWindow = getElement("game-window");
     const restoreBtn = getElement("restore-btn");
 
-    if (gameWindow) gameWindow.classList.add("minimized");
+    if (gameWindow) {
+      gameWindow.classList.add("minimized");
+      gameWindow.classList.remove("maximized");
+    }
     if (restoreBtn) restoreBtn.style.display = "block";
   },
 
@@ -244,6 +341,8 @@ const App = {
 
     if (gameWindow) gameWindow.classList.remove("minimized");
     if (restoreBtn) restoreBtn.style.display = "none";
+    const gameFrame = getElement("game-frame");
+    if (gameFrame) gameFrame.focus();
   },
 
   /**
