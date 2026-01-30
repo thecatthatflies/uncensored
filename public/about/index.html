@@ -100,7 +100,22 @@
     <script src="../components/themeManager.js"></script>
     <script src="../components/componentLoader.js"></script>
     <script>
-        loadNavbar('../components/navbar.html');
+        // Initialize theme switcher
+        document.addEventListener("DOMContentLoaded", () => {
+            // Setup theme switcher event listeners
+            document.querySelectorAll(".switcher button[id^='theme-']").forEach((button) => {
+                button.addEventListener("click", (e) => {
+                    const theme = e.target.id.replace("theme-", "");
+                    ThemeManager.setTheme(theme);
+                });
+            });
+
+            // Update switcher to reflect current theme
+            ThemeManager.updateSwitcher();
+
+            // Load navbar
+            loadNavbar('../components/navbar.html');
+        });
     </script>
 </body>
 

@@ -189,7 +189,6 @@ const ProxyApp = {
      */
     setupInitialState() {
         ThemeManager.updateSwitcher();
-        this.updateStatus("Ready");
     },
 
     /**
@@ -219,8 +218,6 @@ const ProxyApp = {
     async navigateTo(url) {
         const tab = this.tabs[this.currentTab];
         if (!tab) return;
-
-        this.updateStatus("Loading...");
 
         try {
             // Setup WISP transport if needed
@@ -270,11 +267,9 @@ const ProxyApp = {
                 addressBar.value = url;
             }
 
-            this.updateStatus("Loaded");
             this.hideError();
         } catch (err) {
             this.showError("Failed to load page", err);
-            this.updateStatus("Error loading page");
         }
     },
 
@@ -427,19 +422,9 @@ const ProxyApp = {
             tab.title = title;
         }
 
-        const tabEl = document.querySelector(`.tab[data-tab="${tabIndex}"] .tab-title`);
-        if (tabEl) {
-            tabEl.textContent = title;
-        }
-    },
-
-    /**
-     * Update status bar
-     */
-    updateStatus(text) {
-        const statusText = document.getElementById("status-text");
-        if (statusText) {
-            statusText.textContent = text;
+        const tabTitleEl = document.querySelector(`.tab[data-tab="${tabIndex}"] .tab-title`);
+        if (tabTitleEl) {
+            tabTitleEl.textContent = title;
         }
     },
 
