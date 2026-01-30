@@ -1,5 +1,4 @@
 @import url("../components/shared.css");
-
 body {
   padding: 0 0 120px 0;
 }
@@ -237,19 +236,11 @@ header {
   display: none;
   flex: 1;
   overflow-y: auto;
-  position: relative;
 }
 
 .tab-content.active {
   display: flex;
   flex-direction: column;
-}
-
-.tab-content iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  flex: 1;
 }
 
 .tab-content::-webkit-scrollbar {
@@ -282,31 +273,6 @@ header {
 
 #page-info {
   color: var(--accent);
-}
-
-/* Error Display */
-#error-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: var(--bg);
-  border: 1px solid var(--br);
-  padding: 1rem;
-  max-width: 400px;
-  z-index: 1000;
-}
-
-#sj-error {
-  color: #ff6666;
-  white-space: pre-wrap;
-  margin: 0 0 0.5rem 0;
-}
-
-#sj-error-code {
-  font-size: 12px;
-  color: var(--fg);
-  font-family: "Courier New", Courier, monospace;
-  margin: 0;
 }
 
 @media (max-width: 768px) {

@@ -4,76 +4,83 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Newton</title>
+    <title>Newton - Proxy</title>
     <link rel="stylesheet" href="index.css"/>
 </head>
 
 <body>
     <header>
-            <h1><a href="../homepage/index.html" class="logo">Newton</a></h1>
+        <h1><a href="../homepage/index.html" class="logo">Newton</a></h1>
         <div class="switchers">
             <div class="switcher" id="theme-switcher">
                 <button id="theme-quartz">QUARTZ</button>
                 <button id="theme-slate">SLATE</button>
                 <button id="theme-midnight">MIDNIGHT</button>
+            </div>
         </div>
-      </div>
     </header>
 
     <main id="content">
-      <div class="browser-container">
-        <div class="browser-chrome">
-          <!-- Navigation Bar -->
-          <div class="nav-bar">
-            <div class="nav-controls">
-              <button type="button" class="nav-btn-control" id="back-btn" title="Back"><i data-lucide="arrow-left"></i></button>
-              <button type="button" class="nav-btn-control" id="forward-btn" title="Forward"><i data-lucide="arrow-right"></i></button>
-              <button type="button" class="nav-btn-control" id="refresh-btn" title="Refresh"><i data-lucide="rotate-cw"></i></button>
+        <div class="browser-container">
+            <div class="browser-chrome">
+                <!-- Navigation Bar -->
+                <div class="nav-bar">
+                    <div class="nav-controls">
+                        <button type="button" class="nav-btn-control" id="back-btn" title="Back"><i data-lucide="arrow-left"></i></button>
+                        <button type="button" class="nav-btn-control" id="forward-btn" title="Forward"><i data-lucide="arrow-right"></i></button>
+                        <button type="button" class="nav-btn-control" id="refresh-btn" title="Refresh"><i data-lucide="rotate-cw"></i></button>
+                    </div>
+
+                    <!-- Address Bar -->
+                    <div class="address-bar-container">
+                        <input type="text" id="address-bar" class="address-bar" placeholder="Enter URL or search..." value="">
+                        <button type="button" class="search-btn" id="search-btn">Go</button>
+                    </div>
+                    <button type="button" class="fullscreen-btn" id="fullscreen-btn" title="Fullscreen"><i data-lucide="maximize"></i></button>
+                </div>
+
+                <!-- Tabs Bar -->
+                <div class="tabs-bar">
+                    <div class="tab active" data-tab="0">
+                        <span class="tab-title">New Tab</span>
+                        <button type="button" class="tab-close" title="Close tab"><i data-lucide="x"></i></button>
+                    </div>
+                    <button type="button" class="tab-add" title="New tab"><i data-lucide="plus"></i></button>
+                </div>
+
+                <!-- Content Area -->
+                <div class="browser-content">
+                    <div class="tab-content active" data-tab="0">
+                        <!-- Scramjet frames will be injected here -->
+                    </div>
+                </div>
+
+                <!-- Status Bar -->
+                <div class="status-bar">
+                    <span id="status-text">Ready</span>
+                    <span id="page-info"></span>
+                </div>
             </div>
-
-            <!-- Address Bar -->
-            <div class="address-bar-container">
-              <input type="text" id="address-bar" class="address-bar" placeholder="Enter URL or search..." value="newton://proxy">
-              <button type="button" class="search-btn" id="search-btn">Go</button>
-            </div>
-            <button type="button" class="fullscreen-btn" id="fullscreen-btn" title="Fullscreen"><i data-lucide="maximize"></i></button>
-          </div>
-
-          <!-- Tabs Bar -->
-          <div class="tabs-bar">
-            <div class="tab active" data-tab="0">
-              <span class="tab-title">newton://proxy</span>
-                <button type="button" class="tab-close" title="Close tab"><i data-lucide="x"></i></button>
-            </div>
-            <button type="button" class="tab-add" title="New tab"><i data-lucide="plus"></i></button>
         </div>
+    </main>
 
-        <!-- Content Area -->
-        <div class="browser-content">
-            <div class="tab-content active" data-tab="0">
-            </div>
-        </div>
+    <div id="navbar-container"></div>
 
-        <!-- Status Bar -->
-        <div class="status-bar">
-            <span id="status-text"></span>
-            <span id="page-info"></span>
-        </div>
-        </div>
-        </div>
-        </main>
+    <!-- Error display -->
+    <div id="error-container" style="display: none;">
+        <p id="sj-error"></p>
+        <pre id="sj-error-code"></pre>
+    </div>
 
-        <div id="navbar-container"></div>
-
-        <script src="https://unpkg.com/lucide@latest"></script>
-        <script src="../components/themeManager.js"></script>
-        <script src="../components/componentLoader.js"></script>
-        <script src="/scram/scramjet.all.js"></script>
-		    <script src="/baremux/index.js"></script>
-        <script src="proxy.js"></script>
-    		<script src="register-sw.js" defer></script>
-		    <script src="search.js" defer></script>
-		    <script src="index.js" defer></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../components/themeManager.js"></script>
+    <script src="../components/componentLoader.js"></script>
+    <script src="/scram/scramjet.all.js"></script>
+    <script src="/baremux/index.js"></script>
+    <script src="config.js"></script>
+    <script src="search.js"></script>
+    <script src="register-sw.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
