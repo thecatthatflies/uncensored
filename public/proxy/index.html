@@ -1,66 +1,79 @@
 <!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-		/>
-		<title>Scramjet</title>
+<html lang="en">
 
-		<link rel="shortcut icon" content="favicon.webp" />
-	
-		<script src="/scram/scramjet.all.js"></script>
-		<script src="/baremux/index.js"></script>
-		
-		<link rel="stylesheet" href="index.css" />
-		<script src="register-sw.js" defer></script>
-		<script src="search.js" defer></script>
-		<script src="index.js" defer></script>
-	</head>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Newton</title>
+    <link rel="stylesheet" href="index.css"/>
+</head>
 
-	<body>
-		<div title="Scramjet Logo" class="flex-center logo-wrapper header-center">
-			<img class="logo" src="sj.png" alt="Scramjet" />
-			<h1>Scramjet | MW</h1>
-		</div>
-		<div class="flex-center desc left-margin">
-			<p>
-				Scramjet is an experimental interception based web proxy designed to
-				evade internet censorship, bypass arbitrary web browser restrictions and
-				innovate web proxy technologies.
-			</p>
-		</div>
+<body>
+    <header>
+            <h1><a href="../homepage/index.html" class="logo">Newton</a></h1>
+        <div class="switchers">
+            <div class="switcher" id="theme-switcher">
+                <button id="theme-quartz">QUARTZ</button>
+                <button id="theme-slate">SLATE</button>
+                <button id="theme-midnight">MIDNIGHT</button>
+        </div>
+      </div>
+    </header>
 
-		<form id="sj-form" class="flex-center">
-			<input
-				id="sj-search-engine"
-				value="https://www.google.com/search?q=%s"
-				type="hidden"
-			/>
-			<input id="sj-address" type="text" placeholder="Search the web freely" />
-		</form>
-		<div class="desc left-margin">
-			<p id="sj-error"></p>
-			<pre id="sj-error-code"></pre>
-		</div>
-		<footer>
-			<div>
-				<a
-					title="The Mercury Workshop GitHub organization"
-					href="https://github.com/MercuryWorkshop"
-					>Mercury Workshop</a
-				>
-				<a
-					title="The example demo app for Scramjet"
-					href="https://github.com/MercuryWorkshop/Scramjet-Demo"
-					>GitHub</a
-				>
-				<a title="License information" href="credits.html">Credits</a>
-			</div>
-			<div>
-				<span>Scramjet &copy; MW 2025</span>
-			</div>
-		</footer>
-	</body>
+    <main id="content">
+      <div class="browser-container">
+        <div class="browser-chrome">
+          <!-- Navigation Bar -->
+          <div class="nav-bar">
+            <div class="nav-controls">
+              <button type="button" class="nav-btn-control" id="back-btn" title="Back"><i data-lucide="arrow-left"></i></button>
+              <button type="button" class="nav-btn-control" id="forward-btn" title="Forward"><i data-lucide="arrow-right"></i></button>
+              <button type="button" class="nav-btn-control" id="refresh-btn" title="Refresh"><i data-lucide="rotate-cw"></i></button>
+            </div>
+
+            <!-- Address Bar -->
+            <div class="address-bar-container">
+              <input type="text" id="address-bar" class="address-bar" placeholder="Enter URL or search..." value="newton://proxy">
+              <button type="button" class="search-btn" id="search-btn">Go</button>
+            </div>
+            <button type="button" class="fullscreen-btn" id="fullscreen-btn" title="Fullscreen"><i data-lucide="maximize"></i></button>
+          </div>
+
+          <!-- Tabs Bar -->
+          <div class="tabs-bar">
+            <div class="tab active" data-tab="0">
+              <span class="tab-title">newton://proxy</span>
+                <button type="button" class="tab-close" title="Close tab"><i data-lucide="x"></i></button>
+            </div>
+            <button type="button" class="tab-add" title="New tab"><i data-lucide="plus"></i></button>
+        </div>
+
+        <!-- Content Area -->
+        <div class="browser-content">
+            <div class="tab-content active" data-tab="0">
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span id="status-text"></span>
+            <span id="page-info"></span>
+        </div>
+        </div>
+        </div>
+        </main>
+
+        <div id="navbar-container"></div>
+
+        <script src="https://unpkg.com/lucide@latest"></script>
+        <script src="../components/themeManager.js"></script>
+        <script src="../components/componentLoader.js"></script>
+        <script src="/scram/scramjet.all.js"></script>
+		    <script src="/baremux/index.js"></script>
+        <script src="proxy.js"></script>
+    		<script src="register-sw.js" defer></script>
+		    <script src="search.js" defer></script>
+		    <script src="index.js" defer></script>
+</body>
+
 </html>
