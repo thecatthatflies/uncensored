@@ -15,7 +15,7 @@ const ProxyApp = {
      * Setup theme switcher event listeners
      */
     setupThemeSwitcher() {
-        document.querySelectorAll(".switcher span[id^='theme-']").forEach((button) => {
+        document.querySelectorAll(".switcher button[id^='theme-']").forEach((button) => {
             button.addEventListener("click", (e) => {
                 const theme = e.target.id.replace("theme-", "");
                 ThemeManager.setTheme(theme);

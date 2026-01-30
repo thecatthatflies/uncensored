@@ -29,11 +29,11 @@ const ThemeManager = {
    */
   updateSwitcher() {
     const currentTheme = localStorage.getItem(THEME_KEY) || DEFAULT_THEME;
-    const switchers = document.querySelectorAll(".switcher span[id^='theme-']");
+    const switchers = document.querySelectorAll(".switcher button[id^='theme-']");
 
-    switchers.forEach((span) => {
-      const themeId = span.id.replace("theme-", "");
-      span.classList.toggle("active", themeId === currentTheme);
+    switchers.forEach((btn) => {
+      const themeId = btn.id.replace("theme-", "");
+      btn.classList.toggle("active", themeId === currentTheme);
     });
   },
 

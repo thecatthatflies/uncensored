@@ -105,7 +105,7 @@ const App = {
     }
 
     // Theme switcher
-    document.querySelectorAll(".switcher span[id^='theme-']").forEach((btn) => {
+    document.querySelectorAll(".switcher button[id^='theme-']").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         const theme = e.target.id.replace("theme-", "");
         ThemeManager.setTheme(theme);
@@ -113,7 +113,7 @@ const App = {
     });
 
     // Mode switcher
-    document.querySelectorAll(".switcher span[id^='mode-']").forEach((btn) => {
+    document.querySelectorAll(".switcher button[id^='mode-']").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         const mode = e.target.id.replace("mode-", "");
         this.setMode(mode);
@@ -121,7 +121,7 @@ const App = {
     });
 
     // Settings modal
-    const settingsTrigger = document.querySelector("#settings-trigger span");
+    const settingsTrigger = document.querySelector("#settings-trigger button");
     if (settingsTrigger) {
       settingsTrigger.addEventListener("click", () => this.toggleSettings());
     }
@@ -187,9 +187,9 @@ const App = {
    * Update mode switcher UI
    */
   updateModeSwitcher() {
-    document.querySelectorAll(".switcher span[id^='mode-']").forEach((span) => {
-      const modeId = span.id.replace("mode-", "");
-      span.classList.toggle("active", modeId === MODE);
+    document.querySelectorAll(".switcher button[id^='mode-']").forEach((btn) => {
+      const modeId = btn.id.replace("mode-", "");
+      btn.classList.toggle("active", modeId === MODE);
     });
   },
 

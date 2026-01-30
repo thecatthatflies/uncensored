@@ -47,6 +47,11 @@
   box-sizing: border-box;
 }
 
+button {
+  all: unset;
+  cursor: pointer;
+}
+
 body {
   background: var(--bg);
   color: var(--fg);
@@ -104,7 +109,11 @@ main {
   padding-left: 1rem;
 }
 
-.switcher span {
+.switcher button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
   cursor: pointer;
   font-size: 0.75rem;
   padding: 0.4rem 0;
@@ -112,7 +121,7 @@ main {
   transition: var(--transition-main);
 }
 
-.switcher span:hover,
+.switcher button:hover,
 .switcher .active {
   color: var(--accent);
 }
