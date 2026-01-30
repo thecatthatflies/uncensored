@@ -15,10 +15,9 @@
         </a>
         <div class="switchers">
             <div class="switcher" id="theme-switcher">
-                <span id="theme-quartz" onclick="App.setTheme('quartz')">QUARTZ</span>
-                <span id="theme-slate" onclick="App.setTheme('slate')">SLATE</span>
-                <span id="theme-midnight" onclick="App.setTheme('midnight')">MIDNIGHT</span
-          >
+                <span id="theme-quartz" role="button" tabindex="0">QUARTZ</span>
+                <span id="theme-slate" role="button" tabindex="0">SLATE</span>
+                <span id="theme-midnight" role="button" tabindex="0">MIDNIGHT</span>
         </div>
       </div>
     </header>
@@ -69,82 +68,9 @@
         <div id="navbar-container"></div>
 
         <script src="https://unpkg.com/lucide@latest"></script>
+        <script src="../components/themeManager.js"></script>
         <script src="../components/componentLoader.js"></script>
-        <script>
-            const THEME_KEY = "newton-theme";
-            const App = {
-                isFullscreen: false,
-
-                init() {
-                    this.loadTheme();
-                    this.updateThemeSwitcher();
-                    this.setupFullscreen();
-                },
-
-                loadTheme() {
-                    const theme = localStorage.getItem(THEME_KEY) || "midnight";
-                    this.setTheme(theme);
-                },
-
-                setTheme(theme) {
-                    localStorage.setItem(THEME_KEY, theme);
-                    document.documentElement.setAttribute("data-theme", theme);
-                    this.updateThemeSwitcher();
-                },
-
-                updateThemeSwitcher() {
-                    const theme = localStorage.getItem(THEME_KEY) || "midnight";
-                    document.querySelectorAll(".switcher span").forEach((span) => {
-                        span.classList.remove("active");
-                    });
-                    const themeElement = document.getElementById("theme-" + theme);
-                    if (themeElement) {
-                        themeElement.classList.add("active");
-                    }
-                },
-
-                setupFullscreen() {
-                    const fullscreenBtn = document.getElementById("fullscreen-btn");
-                    fullscreenBtn.addEventListener("click", () => this.toggleFullscreen());
-                },
-
-                // FRICK VSCODE WHY DID YOU BREAK OPTIONAL CHAINING IT MAKES IT SO MUCH EASIER TO READ
-                toggleFullscreen() {
-                    const browserChrome = document.querySelector(".browser-chrome");
-                    const header = document.querySelector("header");
-
-                    if (!this.isFullscreen) {
-                        if (browserChrome.requestFullscreen) {
-                            browserChrome.requestFullscreen();
-                        } else if (browserChrome.webkitRequestFullscreen) {
-                            browserChrome.webkitRequestFullscreen();
-                        } else if (browserChrome.mozRequestFullScreen) {
-                            browserChrome.mozRequestFullScreen();
-                        }
-
-                        header.style.display = "none";
-                        this.isFullscreen = true;
-                    } else {
-                        if (document.exitFullscreen) {
-                            document.exitFullscreen();
-                        } else if (document.webkitExitFullscreen) {
-                            document.webkitExitFullscreen();
-                        } else if (document.mozCancelFullScreen) {
-                            document.mozCancelFullScreen();
-                        }
-
-                        header.style.display = "";
-                        this.isFullscreen = false;
-                    }
-                },
-            };
-
-            document.addEventListener("DOMContentLoaded", () => {
-                App.init();
-                loadNavbar("../components/navbar.html");
-                lucide.createIcons();
-            });
-        </script>
+        <script src="proxy.js"></script>
 </body>
 
 </html>

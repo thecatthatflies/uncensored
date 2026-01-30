@@ -15,9 +15,9 @@
         </a>
         <div class="switchers">
             <div class="switcher" id="theme-switcher">
-                <span id="theme-quartz" onclick="App.setTheme('quartz')">QUARTZ</span>
-                <span id="theme-slate" onclick="App.setTheme('slate')">SLATE</span>
-                <span id="theme-midnight" onclick="App.setTheme('midnight')">MIDNIGHT</span>
+                <span id="theme-quartz" role="button" tabindex="0">QUARTZ</span>
+                <span id="theme-slate" role="button" tabindex="0">SLATE</span>
+                <span id="theme-midnight" role="button" tabindex="0">MIDNIGHT</span>
             </div>
         </div>
     </header>
@@ -38,6 +38,7 @@
 
     <div id="navbar-container"></div>
 
+    <script src="../components/themeManager.js"></script>
     <script src="../components/componentLoader.js"></script>
     <script src="index.js"></script>
     <script>

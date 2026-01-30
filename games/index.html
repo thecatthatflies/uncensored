@@ -14,9 +14,9 @@
         <div id="game-window">
             <div id="window-bar">
                 <div class="window-bar-buttons">
-                    <button class="dot close" title="Close" onclick="App.close()"><i data-lucide="x"></i></button>
-                    <button class="dot min" title="Minimize" onclick="App.minimize()"><i data-lucide="minus"></i></button>
-                    <button class="dot max" title="Maximize" onclick="App.maximize()"><i data-lucide="plus"></i></button>
+                    <button class="dot close" title="Close" aria-label="Close window"><i data-lucide="x"></i></button>
+                    <button class="dot min" title="Minimize" aria-label="Minimize window"><i data-lucide="minus"></i></button>
+                    <button class="dot max" title="Maximize" aria-label="Maximize window"><i data-lucide="plus"></i></button>
                 </div>
                 <div id="win-title"></div>
             </div>
@@ -32,16 +32,16 @@
         <input type="text" id="gameSearch" placeholder="SEARCH..." />
         <div class="switchers">
             <div class="switcher" id="theme-switcher">
-                <span id="theme-quartz" onclick="App.setTheme('quartz')">QUARTZ</span>
-                <span id="theme-slate" onclick="App.setTheme('slate')">SLATE</span>
-                <span id="theme-midnight" onclick="App.setTheme('midnight')">MIDNIGHT</span>
+                <span id="theme-quartz" role="button" tabindex="0">QUARTZ</span>
+                <span id="theme-slate" role="button" tabindex="0">SLATE</span>
+                <span id="theme-midnight" role="button" tabindex="0">MIDNIGHT</span>
             </div>
             <div class="switcher" id="settings-trigger">
-                <span onclick="App.toggleSettings()">SETTINGS</span>
+                <span role="button" tabindex="0">SETTINGS</span>
             </div>
             <div class="switcher" id="mode-switcher">
-                <span id="mode-window" onclick="App.setMode('window')">WINDOW</span>
-                <span id="mode-tab" onclick="App.setMode('tab')">TAB</span>
+                <span id="mode-window" role="button" tabindex="0">WINDOW</span>
+                <span id="mode-tab" role="button" tabindex="0">TAB</span>
             </div>
         </div>
     </header>
@@ -58,8 +58,8 @@
                 <input type="text" id="cloak-favicon" placeholder="https://google.com/favicon.ico" />
             </div>
             <div class="modal-buttons">
-                <button class="save-btn" onclick="App.saveSettings()">SAVE SETTINGS</button>
-                <button class="close-btn" onclick="App.toggleSettings()">CLOSE</button>
+                <button class="save-btn">SAVE SETTINGS</button>
+                <button class="close-btn">CLOSE</button>
             </div>
         </div>
     </div>
@@ -67,18 +67,19 @@
     <!-- Games Grid -->
     <main id="gameList"></main>
 
-    <div id="restore-btn" onclick="App.restore()">RESTORE</div>
+    <div id="restore-btn" role="button" tabindex="0">RESTORE</div>
 
     <div id="navbar-container"></div>
 
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../components/themeManager.js"></script>
     <script src="../components/componentLoader.js"></script>
     <script src="games.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             lucide.createIcons();
+            loadNavbar('../components/navbar.html');
         });
-        loadNavbar('../components/navbar.html');
     </script>
 </body>
 

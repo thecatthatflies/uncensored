@@ -2,318 +2,314 @@
 
 /* Lucide Icons Styling */
 [data-lucide] {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 [data-lucide] svg {
-    width: 100%;
-    height: 100%;
-    color: inherit;
+  width: 100%;
+  height: 100%;
+  color: inherit;
 }
 
 .dot [data-lucide] svg {
-    width: 0.6rem;
-    height: 0.6rem;
+  width: 0.6rem;
+  height: 0.6rem;
 }
 
 /* Header */
 header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: var(--bg);
-    border-bottom: 1px solid var(--br);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--br);
 }
 
 /* Input Styling */
 
 input {
-    flex: 1;
-    min-width: 12rem;
-    background: transparent;
-    border: none;
-    color: var(--hl);
-    padding: 1rem 0;
-    outline: none;
-    font: inherit;
-    letter-spacing: inherit;
+  flex: 1;
+  min-width: 12rem;
+  background: transparent;
+  border: none;
+  color: var(--hl);
+  padding: 1rem 0;
+  outline: none;
+  font: inherit;
+  letter-spacing: inherit;
 }
 
 #gameSearch {
-    flex: 1;
-    min-width: 12rem;
-    background: transparent;
-    color: var(--hl);
-    padding: 0;
-    outline: none;
-    font: inherit;
-    letter-spacing: inherit;
-    margin-bottom: 0;
+  flex: 1;
+  min-width: 12rem;
+  background: transparent;
+  color: var(--hl);
+  padding: 0;
+  outline: none;
+  font: inherit;
+  letter-spacing: inherit;
+  margin-bottom: 0;
 }
 
 #gameSearch::placeholder {
-    color: var(--fg);
+  color: var(--fg);
 }
-
 
 /* Games Grid */
 
 #gameList {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
-    gap: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: 0.5rem;
 }
 
 .game-card {
-    padding: 1rem;
-    border: 1px solid var(--br);
-    cursor: pointer;
-    transition: var(--transition-main);
-    justify-content: center;
-    min-height: 4rem;
-    text-align: center;
+  padding: 1rem;
+  border: 1px solid var(--br);
+  cursor: pointer;
+  transition: var(--transition-main);
+  justify-content: center;
+  min-height: 4rem;
+  text-align: center;
 }
 
 .game-card:hover {
-    border-color: var(--fg);
-    color: var(--hl);
-    background: rgba(255, 255, 255, 0.02);
-    transform: translateY(-2px);
+  border-color: var(--fg);
+  color: var(--hl);
+  background: rgba(255, 255, 255, 0.02);
+  transform: translateY(-2px);
 }
-
 
 /* Game Window */
 
 #window-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    display: none;
-    justify-content: center;
-    z-index: 676;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    transition: opacity 0.4s ease;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  justify-content: center;
+  z-index: 676;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: opacity 0.4s ease;
 }
 
 #game-window {
-    width: 92vw;
-    height: 88vh;
-    background: var(--bg);
-    border: 1px solid var(--br);
-    border-radius: 0.8rem;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
-    transform: translateY(30px) scale(0.95);
-    opacity: 0;
-    transition: var(--transition-main);
-    will-change: transform, opacity;
+  width: 92vw;
+  height: 88vh;
+  background: var(--bg);
+  border: 1px solid var(--br);
+  border-radius: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+  transform: translateY(30px) scale(0.95);
+  opacity: 0;
+  transition: var(--transition-main);
+  will-change: transform, opacity;
 }
 
 #game-window.active {
-    transform: translateY(0) scale(1);
-    opacity: 1;
+  transform: translateY(0) scale(1);
+  opacity: 1;
 }
 
 #game-window.maximized {
-    width: 100vw !important;
-    height: 100vh !important;
-    border-radius: 0;
-    border: none;
+  width: 100vw !important;
+  height: 100vh !important;
+  border-radius: 0;
+  border: none;
 }
 
 #game-window.minimized {
-    transform: translateY(100vh) scale(0.8);
-    opacity: 0;
-    pointer-events: none;
+  transform: translateY(100vh) scale(0.8);
+  opacity: 0;
+  pointer-events: none;
 }
 
 #window-bar {
-    display: flex;
-    align-items: center;
-    background: var(--br);
-    padding: 0.8rem 1.2rem;
-    justify-content: space-between;
-    -webkit-user-select: none;
-    user-select: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  background: var(--br);
+  padding: 0.8rem 1.2rem;
+  justify-content: space-between;
+  -webkit-user-select: none;
+  user-select: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .dot {
-    width: 0.8rem;
-    height: 0.8rem;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.6rem;
-    font-weight: 700;
-    color: rgba(0, 0, 0, 0.4);
-    transition: var(--transition-main);
+  width: 0.8rem;
+  height: 0.8rem;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.4);
+  transition: var(--transition-main);
 }
 
 .dot:hover {
-    filter: brightness(1.2);
+  filter: brightness(1.2);
 }
 
 .dot:active {
-    transform: scale(0.9);
+  transform: scale(0.9);
 }
 
 .close {
-    background: #ff605c;
+  background: #ff605c;
 }
 
 .min {
-    background: #ffbd44;
+  background: #ffbd44;
 }
 
 .max {
-    background: #00ca4e;
+  background: #00ca4e;
 }
 
 .window-bar-buttons {
-    display: flex;
-    gap: 0.6rem;
+  display: flex;
+  gap: 0.6rem;
 }
 
 #win-title {
-    font-size: 0.7rem;
-    font-weight: 700;
-    opacity: 0.8;
+  font-size: 0.7rem;
+  font-weight: 700;
+  opacity: 0.8;
 }
 
 #game-frame {
-    flex: 1;
-    border: none;
-    background: #000;
+  flex: 1;
+  border: none;
+  background: #000;
 }
 
 #restore-btn {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--br);
-    color: var(--fg);
-    padding: 0.6rem 1.2rem;
-    border: 1px solid var(--fg);
-    border-radius: 2rem;
-    font-size: 0.7rem;
-    cursor: pointer;
-    display: none;
-    z-index: 677;
-    transition: var(--transition-main);
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--br);
+  color: var(--fg);
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--fg);
+  border-radius: 2rem;
+  font-size: 0.7rem;
+  cursor: pointer;
+  display: none;
+  z-index: 677;
+  transition: var(--transition-main);
 }
 
 #restore-btn:hover {
-    border-color: var(--hl);
-    color: var(--hl);
-    background: var(--bg);
+  border-color: var(--hl);
+  color: var(--hl);
+  background: var(--bg);
 }
-
 
 /* Settings Modal */
 
 .modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.9);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
 .modal.active {
-    display: flex;
+  display: flex;
 }
 
 .modal-content {
-    background: var(--bg);
-    border: 1px solid var(--br);
-    padding: 2rem;
-    width: min(90%, 360px);
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  background: var(--bg);
+  border: 1px solid var(--br);
+  padding: 2rem;
+  width: min(90%, 360px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .modal-content h3 {
-    margin: 0;
-    font-size: 0.8rem;
-    color: var(--hl);
-    border-bottom: 1px solid var(--br);
-    padding-bottom: 1rem;
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--hl);
+  border-bottom: 1px solid var(--br);
+  padding-bottom: 1rem;
 }
 
 .setting-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .setting-item label {
-    font-size: 0.6rem;
-    color: var(--fg);
+  font-size: 0.6rem;
+  color: var(--fg);
 }
 
 .setting-item.row {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .setting-item.row input {
-    flex: 0;
-    min-width: auto;
-    width: 1rem;
-    height: 1rem;
-    cursor: pointer;
+  flex: 0;
+  min-width: auto;
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
 }
 
 .setting-item input:not([type="checkbox"]) {
-    border-bottom: 1px solid var(--br);
-    font-size: 0.75rem;
-    padding: 0.5rem 0;
+  border-bottom: 1px solid var(--br);
+  font-size: 0.75rem;
+  padding: 0.5rem 0;
 }
 
 .modal-buttons {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .modal-buttons button {
-    flex: 1;
-    background: transparent;
-    border: 1px solid var(--br);
-    color: var(--fg);
-    padding: 0.7rem;
-    cursor: pointer;
-    text-transform: uppercase;
-    font: inherit;
-    font-size: 0.65rem;
-    transition: var(--transition-main);
+  flex: 1;
+  background: transparent;
+  border: 1px solid var(--br);
+  color: var(--fg);
+  padding: 0.7rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  font: inherit;
+  font-size: 0.65rem;
+  transition: var(--transition-main);
 }
 
 .modal-buttons .save-btn {
-    border-color: var(--hl);
-    color: var(--hl);
+  border-color: var(--hl);
+  color: var(--hl);
 }
 
 .modal-buttons button:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: var(--hl);
-    color: var(--hl);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--hl);
+  color: var(--hl);
 }
-
 
 /*
 Responsiveness

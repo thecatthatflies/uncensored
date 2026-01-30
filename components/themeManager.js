@@ -1,0 +1,50 @@
+/**
+ * Centralized theme management module
+ */
+
+const THEME_KEY = "newton-theme";
+const DEFAULT_THEME = "quartz";
+
+const ThemeManager = {
+  /**
+   * Initialize theme from localStorage or use default
+   */
+  init() {
+    const saved = localStorage.getItem(THEME_KEY) || DEFAULT_THEME;
+    this.setTheme(saved);
+  },
+
+  /**
+   * Set active theme and update UI
+   * @param {string} theme - Theme name (quartz, slate, midnight)
+   */
+  setTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem(THEME_KEY, theme);
+    this.updateSwitcher();
+  },
+
+  /**
+   * Update theme switcher UI to show active theme
+   */
+  updateSwitcher() {
+    const currentTheme = localStorage.getItem(THEME_KEY) || DEFAULT_THEME;
+    const switchers = document.querySelectorAll(".switcher span[id^='theme-']");
+
+    switchers.forEach((span) => {
+      const themeId = span.id.replace("theme-", "");
+      span.classList.toggle("active", themeId === currentTheme);
+    });
+  },
+
+  /**
+   * Get current active theme
+   * @returns {string} Active theme name
+   */
+  getCurrentTheme() {
+    return localStorage.getItem(THEME_KEY) || DEFAULT_THEME;
+  },
+};
+
+// Initialize
+document.addEventListener("DOMContentLoaded", () => ThemeManager.init());

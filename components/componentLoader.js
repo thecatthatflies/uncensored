@@ -1,39 +1,65 @@
-/* no stackoverflow involved trust me bro */
+/**
+ * Component loader utility
+ */
 
+/**
+ * Insert HTML content and execute any contained scripts
+ * @param {HTMLElement} container - Target container element
+ * @param {string} html - HTML content to insert
+ */
 function insertHTMLWithScripts(container, html) {
+  if (!container) {
+    console.warn("Container is null or undefined");
+    return;
+  }
+
   container.innerHTML = html;
-  container.querySelectorAll("script").forEach((script) => {
-    const injected = document.createElement("script");
-    if (script.src) {
-      injected.src = script.src;
-      injected.async = false;
+
+  // Re-execute script tags so they run properly
+  container.querySelectorAll("script").forEach((oldScript) => {
+    const newScript = document.createElement("script");
+
+    if (oldScript.src) {
+      // External script
+      newScript.src = oldScript.src;
+      newScript.async = false;
     } else {
-      injected.textContent = script.textContent;
+      // Inline script
+      newScript.textContent = oldScript.textContent;
     }
-    document.body.appendChild(injected);
-    document.body.removeChild(injected);
-    script.remove();
+
+    // Replace the original script with the new one (which executes it)
+    oldScript.parentNode.replaceChild(newScript, oldScript);
   });
 }
 
+/**
+ * Load navbar component
+ * @param {string} navPath - Path to navbar HTML file
+ * @param {string} containerId - ID of container element (default: "navbar-container")
+ * @returns {Promise<void>}
+ */
 function loadNavbar(navPath, containerId = "navbar-container") {
   const container = document.getElementById(containerId);
+
   if (!container) {
     console.warn(`Navbar container "${containerId}" not found.`);
-    return Promise.reject(new Error("Navbar container missing"));
+    return Promise.reject(new Error(`Navbar container "${containerId}" not found`));
   }
 
   return fetch(navPath)
     .then((response) => {
       if (!response.ok) {
         throw new Error(
-          `Failed to load ${navPath}: ${response.status} ${response.statusText}`,
+          `Failed to load ${navPath}: ${response.status} ${response.statusText}`
         );
       }
       return response.text();
     })
-    .then((html) => insertHTMLWithScripts(container, html))
+    .then((html) => {
+      insertHTMLWithScripts(container, html);
+    })
     .catch((error) => {
-      console.error("Navbar load failed", error);
+      console.error("Failed to load navbar component:", error);
     });
 }
