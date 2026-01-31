@@ -1,7 +1,7 @@
 @import url("../components/shared.css");
 
 body {
-  padding: 0 0 120px 0;
+  padding: 0;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -20,21 +20,21 @@ body {
 }
 
 header {
-  padding: 1rem 1rem 0.75rem 1rem;
+  padding: 1rem;
   margin: 0;
+  border-bottom: 1px solid var(--br);
 }
 
 .browser-container {
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  margin: 0;
+  padding: 1rem;
 }
 
 .browser-chrome {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 240px);
+  height: calc(100vh - 200px);
   min-height: 500px;
   border: 1px solid var(--br);
   background: var(--bg);

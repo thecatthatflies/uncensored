@@ -62,6 +62,32 @@ const ProxyApp = {
         if (!fullscreenBtn) return;
 
         fullscreenBtn.addEventListener("click", () => this.toggleFullscreen());
+
+        // Listen for fullscreen change events (including Escape key)
+        document.addEventListener("fullscreenchange", () => this.handleFullscreenChange());
+        document.addEventListener("webkitfullscreenchange", () => this.handleFullscreenChange());
+        document.addEventListener("mozfullscreenchange", () => this.handleFullscreenChange());
+    },
+
+    /**
+     * Handle fullscreen state changes
+     */
+    handleFullscreenChange() {
+        const header = document.querySelector("header");
+        if (!header) return;
+
+        const isCurrentlyFullscreen =
+            document.fullscreenElement ||
+            document.webkitFullscreenElement ||
+            document.mozFullScreenElement;
+
+        if (isCurrentlyFullscreen) {
+            header.style.display = "none";
+            this.isFullscreen = true;
+        } else {
+            header.style.display = "";
+            this.isFullscreen = false;
+        }
     },
 
     /**
@@ -69,9 +95,7 @@ const ProxyApp = {
      */
     toggleFullscreen() {
         const browserChrome = document.querySelector(".browser-chrome");
-        const header = document.querySelector("header");
-
-        if (!browserChrome || !header) return;
+        if (!browserChrome) return;
 
         if (!this.isFullscreen) {
             // Enter fullscreen
@@ -83,9 +107,6 @@ const ProxyApp = {
             if (requestFullscreen) {
                 requestFullscreen.call(browserChrome);
             }
-
-            header.style.display = "none";
-            this.isFullscreen = true;
         } else {
             // Exit fullscreen
             const exitFullscreen =
@@ -96,9 +117,6 @@ const ProxyApp = {
             if (exitFullscreen) {
                 exitFullscreen.call(document);
             }
-
-            header.style.display = "";
-            this.isFullscreen = false;
         }
     },
 

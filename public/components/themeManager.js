@@ -60,8 +60,13 @@ const ThemeManager = {
   },
 };
 
-// Initialize
+// Apply theme immediately before DOMContentLoaded to prevent flashing
+(function() {
+  const saved = localStorage.getItem(THEME_KEY) || DEFAULT_THEME;
+  document.documentElement.setAttribute("data-theme", saved);
+})();
+
+// Initialize event listeners
 document.addEventListener("DOMContentLoaded", () => {
-  ThemeManager.init();
   ThemeManager.setupListeners();
 });
