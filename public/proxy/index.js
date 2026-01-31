@@ -43,7 +43,6 @@ const ProxyApp = {
         }
 
         // Setup UI
-        this.setupThemeSwitcher();
         this.setupFullscreen();
         this.setupNavControls();
         this.setupAddressBar();
@@ -54,17 +53,6 @@ const ProxyApp = {
         this.addTab();
     },
 
-    /**
-     * Setup theme switcher event listeners
-     */
-    setupThemeSwitcher() {
-        document.querySelectorAll(".switcher button[id^='theme-']").forEach((button) => {
-            button.addEventListener("click", (e) => {
-                const theme = e.target.id.replace("theme-", "");
-                ThemeManager.setTheme(theme);
-            });
-        });
-    },
 
     /**
      * Setup fullscreen toggle functionality
@@ -350,9 +338,6 @@ const ProxyApp = {
 
         // Switch to new tab
         this.switchTab(tabIndex);
-
-        // Reinitialize lucide icons
-        lucide.createIcons();
     },
 
     /**
@@ -392,18 +377,23 @@ const ProxyApp = {
      * Switch to a different tab
      */
     switchTab(tabIndex) {
-        // Update current tab
+        // Only update UI if tab actually changed
+        if (this.currentTab === tabIndex) return;
+
+        const prevTabIndex = this.currentTab;
         this.currentTab = tabIndex;
 
-        // Update tab UI
-        document.querySelectorAll(".tab").forEach(tab => {
-            tab.classList.toggle("active", parseInt(tab.dataset.tab) === tabIndex);
-        });
+        // Update tab UI - only update the previous and current tabs
+        const prevTabEl = document.querySelector(`.tab[data-tab="${prevTabIndex}"]`);
+        const currTabEl = document.querySelector(`.tab[data-tab="${tabIndex}"]`);
+        if (prevTabEl) prevTabEl.classList.remove("active");
+        if (currTabEl) currTabEl.classList.add("active");
 
-        // Update content UI
-        document.querySelectorAll(".tab-content").forEach(content => {
-            content.classList.toggle("active", parseInt(content.dataset.tab) === tabIndex);
-        });
+        // Update content UI - only update the previous and current content
+        const prevContentEl = document.querySelector(`.tab-content[data-tab="${prevTabIndex}"]`);
+        const currContentEl = document.querySelector(`.tab-content[data-tab="${tabIndex}"]`);
+        if (prevContentEl) prevContentEl.classList.remove("active");
+        if (currContentEl) currContentEl.classList.add("active");
 
         // Update address bar
         const tab = this.tabs.find(t => t.index === tabIndex);

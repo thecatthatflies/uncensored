@@ -107,14 +107,6 @@ const App = {
       searchInput.addEventListener("input", (e) => this.render(e.target.value));
     }
 
-    // Theme switcher
-    document.querySelectorAll(".switcher button[id^='theme-']").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        const theme = e.target.id.replace("theme-", "");
-        ThemeManager.setTheme(theme);
-      });
-    });
-
     // Mode switcher
     document.querySelectorAll(".switcher button[id^='mode-']").forEach((btn) => {
       btn.addEventListener("click", (e) => {

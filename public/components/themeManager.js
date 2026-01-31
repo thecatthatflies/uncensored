@@ -46,7 +46,22 @@ const ThemeManager = {
   getCurrentTheme() {
     return localStorage.getItem(THEME_KEY) || DEFAULT_THEME;
   },
+
+  /**
+   * Setup theme switcher event listeners (called once during init)
+   */
+  setupListeners() {
+    document.querySelectorAll(".switcher button[id^='theme-']").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const theme = e.target.id.replace("theme-", "");
+        this.setTheme(theme);
+      });
+    });
+  },
 };
 
 // Initialize
-document.addEventListener("DOMContentLoaded", () => ThemeManager.init());
+document.addEventListener("DOMContentLoaded", () => {
+  ThemeManager.init();
+  ThemeManager.setupListeners();
+});

@@ -35,19 +35,29 @@ function insertHTMLWithScripts(container, html) {
   });
 }
 
+// Track if navbar has been loaded to prevent duplicate loads
+let navbarLoaded = false;
+
 /**
- * Load navbar component
+ * Load navbar component (once per session)
  * @param {string} navPath - Path to navbar HTML file
  * @param {string} containerId - ID of container element (default: "navbar-container")
  * @returns {Promise<void>}
  */
 function loadNavbar(navPath, containerId = "navbar-container") {
+  // Guard: prevent loading navbar multiple times
+  if (navbarLoaded) {
+    return Promise.resolve();
+  }
+
   const container = document.getElementById(containerId);
 
   if (!container) {
     console.warn(`Navbar container "${containerId}" not found.`);
     return Promise.reject(new Error(`Navbar container "${containerId}" not found`));
   }
+
+  navbarLoaded = true;
 
   return fetch(navPath)
     .then((response) => {
@@ -63,5 +73,6 @@ function loadNavbar(navPath, containerId = "navbar-container") {
     })
     .catch((error) => {
       console.error("Failed to load navbar component:", error);
+      navbarLoaded = false; // Reset flag on error so it can retry
     });
 }
